@@ -10,7 +10,7 @@ export default class Player extends Component {
   state = {
     playedPercent: 0,
     playedSeconds: 0,
-    duration: 0,
+    duration: 0
   }
 
   onProgress = ({ played: playedPercent, playedSeconds }) => {
@@ -22,10 +22,10 @@ export default class Player extends Component {
   onSeekMouseDown = () => {
     this.setState({ seeking: true })
   }
-  onSeekChange = (e) => {
+  onSeekChange = e => {
     this.setState({ playedPercent: parseFloat(e.target.value) })
   }
-  onSeekMouseUp = (e) => {
+  onSeekMouseUp = e => {
     this.setState({ seeking: false })
     this.player.seekTo(parseFloat(e.target.value))
   }
@@ -36,14 +36,14 @@ export default class Player extends Component {
       title,
       isPlaying,
       setPlayState,
-      togglePlayPause,
+      togglePlayPause
     } = this.props
     const { playedPercent, playedSeconds, duration } = this.state
 
     return (
       <div className="player">
         <ReactPlayer
-          ref={(player) => {
+          ref={player => {
             this.player = player
           }}
           className="react-player"
@@ -54,9 +54,9 @@ export default class Player extends Component {
           onPlay={() => setPlayState(true)}
           onPause={() => setPlayState(false)}
           onEnded={() => setPlayState(false)}
-          onError={(e) => console.log('onError', e)}
+          onError={e => console.log('onError', e)}
           onProgress={this.onProgress}
-          onDuration={(duration) => this.setState({ duration })}
+          onDuration={duration => this.setState({ duration })}
           config={{ file: { forceAudio: true } }}
           progressInterval={1000}
         />

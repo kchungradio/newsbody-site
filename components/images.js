@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
 import Lightbox from 'react-images'
 
-import config from '../config'
-
 export default class Images extends Component {
   state = {
     lightboxIsOpen: false,
-    currentImage: 0,
+    currentImage: 0
   }
 
-  openLightbox = (i) => {
+  openLightbox = i => {
     this.setState({
       lightboxIsOpen: true,
-      currentImage: i,
+      currentImage: i
     })
   }
   closeLightbox = () => {
     this.setState({
-      lightboxIsOpen: false,
+      lightboxIsOpen: false
     })
   }
-
   prevImage = () => {
-    this.setState((prevState) => ({ currentImage: prevState.currentImage - 1 }))
+    this.setState(prevState => ({ currentImage: prevState.currentImage - 1 }))
   }
   nextImage = () => {
-    this.setState((prevState) => ({ currentImage: prevState.currentImage + 1 }))
+    this.setState(prevState => ({ currentImage: prevState.currentImage + 1 }))
   }
 
   render() {
@@ -34,8 +31,8 @@ export default class Images extends Component {
 
     if (!images || !Array.isArray(images)) return null
 
-    const imageObjects = images.map((image) => ({
-      src: config.s3.rootUrl + image.filename,
+    const imageObjects = images.map(({ url }) => ({
+      src: url
     }))
 
     return (
@@ -46,10 +43,10 @@ export default class Images extends Component {
               key={image.filename + idx}
               onClick={() => this.openLightbox(idx)}
             >
-              <img src={config.s3.rootUrl + image.filename} />
+              <img src={image.formats ? image.formats.thumbnail.url : ''} />
               {onDelete && (
                 <span
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation()
                     onDelete(image.id)
                   }}

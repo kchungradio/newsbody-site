@@ -1,8 +1,9 @@
 {
   "name": "kchung.news",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.1",
     "date-fns": "^2.17.0",
     "next": "^10.0.6",
     "react": "^16.14.0",
@@ -25,6 +26,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "pretty": "prettier --check '**/*.js'"
   }
 }
